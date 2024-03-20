@@ -17,7 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-        <quarkus.platform.version>3.6.6</quarkus.platform.version>
+        <quarkus.platform.version>3.7.3</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.1.2</surefire-plugin.version>
         <maven.plugin.validation>VERBOSE</maven.plugin.validation>
@@ -47,7 +47,6 @@
     </dependencyManagement>
 
     <dependencies>
-
         <dependency>
             <groupId>com.google.firebase</groupId>
             <artifactId>firebase-admin</artifactId>
@@ -66,61 +65,56 @@
 
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.quarkus</groupId>
             <artifactId>quarkus-kotlin</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-oidc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-keycloak-admin-client-reactive</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-oidc</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-keycloak-admin-client-reactive</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-postgresql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-agroal</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-narayana-jta</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-jdbc-postgresql</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-agroal</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-narayana-jta</artifactId>-->
+<!--        </dependency>-->
 
         <!-- !!! liquibase-core version should be in sync with version, used in
           testcontainers-jooq-codegen-maven-plugin
           -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-liquibase</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.liquibase</groupId>
-                    <artifactId>liquibase-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-liquibase</artifactId>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.liquibase</groupId>-->
+<!--                    <artifactId>liquibase-core</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
         <!-- !!! liquibase-core version should be in sync with version, used in
           testcontainers-jooq-codegen-maven-plugin
           -->
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>4.22.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.liquibase</groupId>-->
+<!--            <artifactId>liquibase-core</artifactId>-->
+<!--            <version>4.22.0</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -131,11 +125,11 @@
             <artifactId>quarkus-resteasy-reactive</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.jooq</groupId>-->
+<!--            <artifactId>jooq</artifactId>-->
+<!--            <version>${jooq.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -237,64 +231,64 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>testcontainers-jooq-codegen-maven-plugin</artifactId>
-                <version>${testcontainers-jooq-codegen-maven-plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.testcontainers</groupId>
-                        <artifactId>postgresql</artifactId>
-                        <version>${testcontainers.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.postgresql</groupId>
-                        <artifactId>postgresql</artifactId>
-                        <version>${postgresql.jdbc.version}</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>generate-jooq-sources</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <skip>${jooq.skip.generation}</skip>
-                            <database>
-                                <type>POSTGRES</type>
-                                <containerImage>postgres:15-alpine</containerImage>
-                            </database>
-                            <liquibase>
-                                <changeLogDirectory>src/main/resources/liquibase</changeLogDirectory>
-                                <changeLogPath>db.changelog-master.xml</changeLogPath>
-                                <liquibaseSchemaName>public</liquibaseSchemaName>
-                                <defaultSchemaName>public</defaultSchemaName>
-                            </liquibase>
-                            <jooq>
-                                <generator>
-                                    <database>
-                                        <includes>.*</includes>
-                                        <excludes>DATABASECHANGE.*</excludes>
-                                        <inputSchema>public</inputSchema>
-                                        <forcedTypes>
-                                            <forcedType>
-                                                <name>INSTANT</name>
-                                                <includeTypes>TIMESTAMPTZ</includeTypes>
-                                            </forcedType>
-                                        </forcedTypes>
-                                    </database>
-                                    <target>
-                                        <packageName>com.github.onotoliy.opposite.treasure.jooq</packageName>
-                                        <directory>target/generated-sources/jooq</directory>
-                                    </target>
-                                </generator>
-                            </jooq>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.testcontainers</groupId>-->
+<!--                <artifactId>testcontainers-jooq-codegen-maven-plugin</artifactId>-->
+<!--                <version>${testcontainers-jooq-codegen-maven-plugin.version}</version>-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.testcontainers</groupId>-->
+<!--                        <artifactId>postgresql</artifactId>-->
+<!--                        <version>${testcontainers.version}</version>-->
+<!--                    </dependency>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.postgresql</groupId>-->
+<!--                        <artifactId>postgresql</artifactId>-->
+<!--                        <version>${postgresql.jdbc.version}</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>generate-jooq-sources</id>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <configuration>-->
+<!--                            <skip>${jooq.skip.generation}</skip>-->
+<!--                            <database>-->
+<!--                                <type>POSTGRES</type>-->
+<!--                                <containerImage>postgres:15-alpine</containerImage>-->
+<!--                            </database>-->
+<!--                            <liquibase>-->
+<!--                                <changeLogDirectory>src/main/resources/liquibase</changeLogDirectory>-->
+<!--                                <changeLogPath>db.changelog-master.xml</changeLogPath>-->
+<!--                                <liquibaseSchemaName>public</liquibaseSchemaName>-->
+<!--                                <defaultSchemaName>public</defaultSchemaName>-->
+<!--                            </liquibase>-->
+<!--                            <jooq>-->
+<!--                                <generator>-->
+<!--                                    <database>-->
+<!--                                        <includes>.*</includes>-->
+<!--                                        <excludes>DATABASECHANGE.*</excludes>-->
+<!--                                        <inputSchema>public</inputSchema>-->
+<!--                                        <forcedTypes>-->
+<!--                                            <forcedType>-->
+<!--                                                <name>INSTANT</name>-->
+<!--                                                <includeTypes>TIMESTAMPTZ</includeTypes>-->
+<!--                                            </forcedType>-->
+<!--                                        </forcedTypes>-->
+<!--                                    </database>-->
+<!--                                    <target>-->
+<!--                                        <packageName>com.github.onotoliy.opposite.treasure.jooq</packageName>-->
+<!--                                        <directory>target/generated-sources/jooq</directory>-->
+<!--                                    </target>-->
+<!--                                </generator>-->
+<!--                            </jooq>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
         </plugins>
 
