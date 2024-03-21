@@ -35,9 +35,9 @@ implements ModifierResource<E, P> {
     @Override
     public void delete(final UUID uuid) {
     }
-
-    @Override
-    public SyncResponse sync(final E dto) {
-        return null;
-    }
+//
+//    @Override
+//    public SyncResponse sync(final E dto) {
+//        return null;
+//    }
 }

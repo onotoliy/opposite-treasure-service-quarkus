@@ -13,6 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
  * @author Anatoliy Pokhresnyi
  */
 @Path(value = "/cashbox")
+@Tag(name = "CashboxApi")
 public class CashboxResource {
 
 

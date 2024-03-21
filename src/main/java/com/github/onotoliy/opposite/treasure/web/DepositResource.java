@@ -13,6 +13,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
@@ -22,6 +23,7 @@ import java.util.UUID;
  * @author Anatoliy Pokhresnyi
  */
 @Path(value = "/deposit")
+@Tag(name = "DepositApi")
 public class DepositResource extends AbstractModifierResource<
         Deposit,
         DepositSearchParameter> {

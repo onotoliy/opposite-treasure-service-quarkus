@@ -8,6 +8,8 @@ import com.github.onotoliy.opposite.treasure.dto.data.core.HasCreationDate;
 import com.github.onotoliy.opposite.treasure.dto.data.core.HasName;
 import com.github.onotoliy.opposite.treasure.dto.data.core.HasUUID;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import org.eclipse.microprofile.openapi.annotations.Operation;
 
 import java.util.UUID;
 
@@ -47,6 +49,9 @@ extends ReaderResource<E, P> {
      */
     @DELETE
     @Path(value = "/{uuid}")
+    @Operation(operationId = "delete", description = "Удаление объекта")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     void delete(@PathParam("uuid") UUID uuid);
 
     /**
@@ -55,8 +60,8 @@ extends ReaderResource<E, P> {
      * @param dto Объект.
      * @return Измененный объект.
      */
-    @PUT
-    @Path(value = "/sync")
-    SyncResponse sync(E dto);
+//    @PUT
+//    @Path(value = "/sync")
+//    SyncResponse sync(E dto);
 
 }

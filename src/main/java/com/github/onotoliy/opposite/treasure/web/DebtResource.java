@@ -15,6 +15,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.QueryParam;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.UUID;
 
@@ -24,6 +25,7 @@ import java.util.UUID;
  * @author Anatoliy Pokhresnyi
  */
 @Path(value = "/debt")
+@Tag(name = "DebtApi")
 public class DebtResource extends AbstractReaderResource<
         Debt,
         DebtSearchParameter> {
